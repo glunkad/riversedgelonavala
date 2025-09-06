@@ -1,0 +1,5 @@
+{
+  "name": "RiversEdge Villa",
+  "description": "An Airbnb-style single-page application for a luxury villa rental. It features an image gallery, amenities list, reviews, and a booking form.",
+  "requestFramePermissions": []
+}
