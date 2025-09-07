@@ -15,6 +15,6 @@ export default defineConfig(({mode}) => {
                 '@': path.resolve(__dirname, '.'),
             }
         },
-        base: '/rivers-edge/',
+        base: '/riversedgelonavala/',
     };
 });
