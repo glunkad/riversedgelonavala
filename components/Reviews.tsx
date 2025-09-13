@@ -9,62 +9,62 @@ const StarIcon: React.FC<{ className?: string }> = ({ className }) => (
     </svg>
 );
 
-
 const ReviewCard: React.FC<{ review: Review }> = ({ review }) => {
-  return (
-    <div className="space-y-3">
-      <div className="flex items-center space-x-3">
-        <img src={review.avatar} alt={review.author} className="w-12 h-12 rounded-full object-cover" />
-        <div>
-          <p className="font-semibold">{review.author}</p>
-          <p className="text-sm text-brand-light">{review.date}</p>
-            <p className="text-sm ">{review.rating}⭐</p>
+    return (
+        <div className="space-y-3">
+            <div className="flex items-center space-x-3">
+                <img src={review.avatar} alt={review.author} className="w-12 h-12 rounded-full object-cover" />
+                <div>
+                    <p className="font-semibold">{review.author}</p>
+                    <p className="text-sm text-brand-light">{review.date}</p>
+                    <p className="text-sm ">{review.rating}⭐</p>
+                </div>
+            </div>
+            <p className="text-gray-800">
+                {review.text}
+            </p>
         </div>
-      </div>
-      <p className="text-gray-800">
-        {review.text}
-      </p>
-    </div>
-  );
+    );
 };
 
 const Reviews: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const displayedReviews = REVIEWS.slice(0, 6);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const displayedReviews = REVIEWS.slice(0, 6);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
 
-  return (
-    <>
-      <div>
-        <h2 className="text-2xl font-semibold mb-4 flex items-center">
-          <StarIcon className="text-brand-pink mr-2"/>
-          {VILLA_DETAILS.rating} · {VILLA_DETAILS.reviewsCount} reviews
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mt-6">
-          {displayedReviews.map((review) => (
-            <ReviewCard key={review.id} review={review} />
-          ))}
-        </div>
-         {REVIEWS.length > 6 && (
-          <button 
-            onClick={openModal}
-            className="mt-8 font-semibold border border-brand-dark rounded-lg px-6 py-3 hover:bg-gray-100 transition duration-300"
-          >
-            Show all {REVIEWS.length} reviews
-          </button>
-        )}
-      </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal} title={`★ ${VILLA_DETAILS.rating} · ${REVIEWS.length} reviews`}>
-        <div className="space-y-8">
-            {REVIEWS.map((review) => (
-              <ReviewCard key={review.id} review={review} />
-            ))}
-        </div>
-      </Modal>
-    </>
-  );
+    return (
+        <>
+            {/* Add an id here so Navbar can target it */}
+            <div id="reviews">
+                <h2 className="text-2xl font-semibold mb-4 flex items-center">
+                    <StarIcon className="text-brand-pink mr-2"/>
+                    {VILLA_DETAILS.rating} · {VILLA_DETAILS.reviewsCount} reviews
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mt-6">
+                    {displayedReviews.map((review) => (
+                        <ReviewCard key={review.id} review={review} />
+                    ))}
+                </div>
+                {REVIEWS.length > 6 && (
+                    <button
+                        onClick={openModal}
+                        className="mt-8 font-semibold border border-brand-dark rounded-lg px-6 py-3 hover:bg-gray-100 transition duration-300"
+                    >
+                        Show all {REVIEWS.length} reviews
+                    </button>
+                )}
+            </div>
+            <Modal isOpen={isModalOpen} onClose={closeModal} title={`★ ${VILLA_DETAILS.rating} · ${REVIEWS.length} reviews`}>
+                <div className="space-y-8">
+                    {REVIEWS.map((review) => (
+                        <ReviewCard key={review.id} review={review} />
+                    ))}
+                </div>
+            </Modal>
+        </>
+    );
 };
 
 export default Reviews;
